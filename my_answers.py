@@ -5,6 +5,8 @@ from keras.layers import Dense, Activation
 from keras.layers import LSTM
 import keras
 
+import string
+
 
 # Fill out the function below that transforms the input series 
 # and window-size into a set of input/output pairs for use with our RNN model
@@ -40,10 +42,11 @@ def build_part1_RNN(window_size):
 
 ### return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
+    letters = string.ascii_letters
     punctuation = ['!', ',', '.', ':', ';', '?']
 
-    for c in punctuation: 
-        text.replace(c, '')
+    text = [c for c in text if c in letters or c in punctuation or c is ' ']
+    text = ''.join(text) # convert to string
 
     return text
 
